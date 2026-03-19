@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ShoppingBag, LayoutDashboard } from "lucide-react";
 import NavbarActions from "./NavbarActions";
+import { Suspense } from "react";
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -15,7 +16,6 @@ export default function Navbar() {
     <header className="bg-white border-b border-gray-300 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-    
           <Link
             href="/"
             className="flex items-center gap-2 font-bold text-xl text-indigo-600"
@@ -24,7 +24,6 @@ export default function Navbar() {
             Catalog
           </Link>
 
-         
           <nav className="flex items-center gap-6">
             <Link
               href="/shop"
@@ -48,7 +47,10 @@ export default function Navbar() {
             </Link>
 
             <div className="w-px h-6 bg-gray-300 mx-2" />
-            <NavbarActions />
+            
+            <Suspense fallback={<div className="w-24 h-8 bg-gray-100 animate-pulse rounded" />}>
+              <NavbarActions />
+            </Suspense>
           </nav>
         </div>
       </div>

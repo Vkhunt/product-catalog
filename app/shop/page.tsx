@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import CatalogFiltersPanel from "@/components/CatalogFiltersPanel";
 import ShopProductGrid from "./ShopProductGrid";
@@ -21,9 +22,13 @@ export default function ShopPage() {
         </div>
 
         <div className="flex gap-8 items-start">
-          <CatalogFiltersPanel mode="storefront" />
+          <Suspense fallback={<div className="w-64 shrink-0 bg-white border border-gray-300 p-4 h-[600px] animate-pulse" />}>
+            <CatalogFiltersPanel mode="storefront" />
+          </Suspense>
 
-          <ShopProductGrid />
+          <Suspense fallback={<div className="flex-1 text-center py-20 text-gray-400">Loading products...</div>}>
+            <ShopProductGrid />
+          </Suspense>
         </div>
       </div>
     </div>
